@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if(isset($_SESSION['id'])){
+    header("location:index.php");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +23,15 @@
     $Password = $_POST['pwd'];
 
     if(($Login =="admin")&&($Password=="ad1234")){
+        $_SESSION["username"] = "admin";
+        $_SESSION["role"] = "a";
+        $_SESSION["id"] = session_id();
         echo "ยินดีต้อนรับ ADMIN";
     } 
     elseif(($Login =="member")&&($Password=="mem1234")){
+        $_SESSION["username"] = "member";
+        $_SESSION["role"] = "m";
+        $_SESSION["id"] = session_id();
         echo "ยินดีต้อนรับ MEMBER";
     }
     else{
