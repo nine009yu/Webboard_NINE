@@ -67,20 +67,6 @@ if(!isset($_SESSION['id'])){
             <div class="col-lg-3 col-md-2 col-sm-1"></div>
         </div>
     </div><br>
-<!-- <h1 style="text-align: center;">Webboard KakKak</h1>
-    <hr>
-    ผู้ใช้ : <?php echo $_SESSION['username'] ;?>
-    <form>
-        <table>
-            <tr><td>หมวดหมู่ :</td><td><select>
-            <option value="general">เรื่องทั่วไป</option>
-            <option value="study">เรื่องเรียน</option>
-        </select></td></tr>
-        <tr><td>หัวข้อ :</td><td><input type="text"></td></tr>
-        <tr><td>เนื้อหา :</td><td><textarea   cols="23" rows="3"></textarea></td></tr>
-        <tr><td></td><td><input type="submit" value="บันทึกข้อความ"></td></tr>
-        </table>
 
-    </form> -->
 </body>
 </html>
