@@ -36,7 +36,9 @@ session_start();
       $sql="SELECT * FROM category";
       foreach($conn->query($sql) as $row){
         echo "<li><a class=dropdown-item href=#>$row[name]</a></li>";
+
       }
+     
       $conn=null;
     ?>
   </ul>
@@ -49,22 +51,52 @@ session_start();
   <?php }?>
 </div>
 <table class="table table-striped mt-4 ">
+
+
 <?php
     $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
-    $sql="SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date FROM post as t1 
+    $sql="SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date,t1.user_id,t2.id  FROM post as t1 
     INNER JOIN user as t2 ON (t1.user_id=t2.id)
     INNER JOIN category as t3 ON (t1.cat_id=t3.id) ORDER BY t1.post_date DESC";
     $result=$conn->query($sql);
+ 
+
+    
     while($row=$result->fetch()){
       echo "<tr><td class='d-flex justify-content-between'>
       <div>[ $row[0] ] <a href=post.php?id=$row[2]
       style=text-decoration:none>$row[1]</a><br>$row[3] - $row[4]</div>";
+
+      
       if(isset($_SESSION['id'])&&$_SESSION['role']=='a'){
-        echo "<div class='me-2 align-self-center'><a href=delete.php?id=$row[2]
-        class='btn btn-danger btn-sm' onclick='return myFunction()'><i class='bi bi-trash'></i></a></div>";
-      }
-      echo "</td></tr>";
+        
+        if($_SESSION['username']==$row[3]){
+        echo "<div class='me-2 align-self-center'>
+        <a href=editpost.php?id=$row[2]
+        class='btn btn-warning btn-sm'><i class='bi bi-pencil-fill'></i></a> 
+        <a href=delete.php?id=$row[2]
+        class='btn btn-danger btn-sm' onclick='return myFunction()'><i class='bi bi-trash'></i></a>   
+        </div>";
+        }
+        else{
+          echo "<div class='me-2 align-self-center'>
+        <a href=delete.php?id=$row[2]
+        class='btn btn-danger btn-sm' onclick='return myFunction()'><i class='bi bi-trash'></i></a>
+        </div>";
+        }
+      }  
+        else if(isset($_SESSION['id'])&&$_SESSION['username']==$row[3]){
+          echo "<div class='me-2 align-self-center'>
+          <a href=editpost.php?id=$row[2]
+          class='btn btn-warning btn-sm'><i class='bi bi-pencil-fill'></i></a> 
+          <a href=delete.php?id=$row[2]
+          class='btn btn-danger btn-sm' onclick='return myFunction()'><i class='bi bi-trash'></i></a>   
+          </div>";
+          }
+      
+      
     }
+  
     $conn=null;
         ?>
 </table>

@@ -58,7 +58,7 @@ session_start();
 
                 <?php if (isset($_SESSION['id'])) { ?>
 
-                    <div class="card border-success mt-3">
+                    <div class="card border-success mb-3">
                         <div class="card-header bg-success text-white">
                             แสดงความคิดเห็น</div>
                         <div class="card-body">
